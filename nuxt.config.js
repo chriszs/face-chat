@@ -35,6 +35,9 @@ module.exports = {
     render: {
         ssr: false
     },
+    router: {
+        base: `/face-chat/`
+    },
     modules: [
         [
             "nuxt-fire",
