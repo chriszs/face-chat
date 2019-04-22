@@ -228,8 +228,8 @@ export default {
                 vm.$fireStore.collection('messages').add({
                     text: vm.messageText,
                     name: 'Someone',
-                    icon: vm.canvas.toDataURL(),
-                    time: vm.$fireStore.FieldValue.serverTimestamp()
+                    icon: vm.canvas.toDataURL(),      
+                    time: Date.now()
                 }).catch(err => {
                     console.log(err);
                 });
