@@ -44,7 +44,7 @@
 
             <md-app-content v-chat-scroll="{ always: false, smooth: true }">
 
-                <div style="width: 100%;height: 50px;">&nbsp;</div>
+                <!-- <div style="width: 100%;height: 50px;">&nbsp;</div> -->
 
                 <div
                     class="md-layout"
@@ -119,7 +119,7 @@ export default {
         vm.$nextTick(() => {
 
             // https://codingthesmartway.com/building-a-real-time-chat-application-with-vue-js-and-firebase-part-2/
-            let messageCollection = vm.$fireStore.collection('messages').orderBy('time');
+            let messageCollection = vm.$fireStore.collection('messages').orderBy('time').limit(25);
 
             messageCollection.onSnapshot(snapshot => {
                 snapshot.docChanges().forEach(change => {
@@ -228,8 +228,8 @@ export default {
                 vm.$fireStore.collection('messages').add({
                     text: vm.messageText,
                     name: 'Someone',
-                    icon: vm.canvas.toDataURL(),      
-                    time: Date.now()
+                    icon: vm.canvas.toDataURL(),
+                    time: vm.$fireStore.FieldValue.serverTimestamp()
                 }).catch(err => {
                     console.log(err);
                 });
@@ -289,9 +289,10 @@ p,
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
+/*
 // Demo purposes only
 .md-drawer {
     width: 230px;
     max-width: calc(100vw - 125px);
-}
+}*/
 </style>
