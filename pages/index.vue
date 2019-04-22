@@ -244,9 +244,9 @@ export default {
 }
 
 .send-box {
-    width: 125px;
+    width: 105px;
     height: 50px;
-    flex: 0 1 125px;
+    flex: 0 1 105px;
 }
 
 .bottom-bar {
