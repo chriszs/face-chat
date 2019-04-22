@@ -48,7 +48,7 @@
                     v-for="message in messages"
                     v-bind:key="message.id"
                 >
-                    <div class="md-layout-item md-size-10">
+                    <div class="md-layout-item avatar-box">
                         <md-avatar class="md-avatar-icon">
                           <img width="40" height="30" :src="message.icon" v-if="message.icon" />
                         </md-avatar>
@@ -64,7 +64,7 @@
 
     <div class="bottom-bar">
         <form class="md-layout" @submit.prevent="submitMessage">
-            <div class="md-layout-item md-size-10">
+            <div class="md-layout-item avatar-box" style="margin-left: 15px">
                 <md-avatar class="md-avatar-icon">
                    <canvas width="40" height="40"></canvas>
                    <video width="40" height="40" style="display: none" playsinline="true" autoplay="true" muted="true"></video>
@@ -239,6 +239,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.avatar-box {
+    width: 50px;
+    height: 50px;
+    flex: 0 1 50px;
+}
+
 .bottom-bar {
     width: 100%;
     height: 75px;
