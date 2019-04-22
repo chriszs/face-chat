@@ -1,7 +1,7 @@
 <template>
     <div class="page-container">
         <md-app md-waterfall md-mode="fixed">
-            <md-app-toolbar class="md-primary">
+            <md-app-toolbar class="md-primary" md-mode="fixed">
 
                 <h3 class="md-title">Face Chat</h3>
 
