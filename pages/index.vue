@@ -3,7 +3,7 @@
         <md-app md-waterfall md-mode="fixed">
             <md-app-toolbar class="md-primary">
 
-                <h3 class="md-title">Face chat</h3>
+                <h3 class="md-title">Face Chat</h3>
 
                 <!--
                 <md-button class="md-icon-button">

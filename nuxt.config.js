@@ -5,7 +5,7 @@ module.exports = {
      ** Headers of the page
      */
     head: {
-        title: "Face chat",
+        title: "Face Chat",
         meta: [
             { charset: "utf-8" },
             {
