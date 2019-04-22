@@ -77,10 +77,8 @@
                 </md-field>
             </div>
 
-            <div class="md-layout-item md-size-20">
-                <md-field>
-                    <md-button class="md-raised md-primary" @click="submitMessage">Send!</md-button>
-                </md-field>
+            <div class="md-layout-item send-box">
+                <md-button class="md-raised md-primary" @click="submitMessage">Send!</md-button>
             </div>
 
         </form>
@@ -245,9 +243,15 @@ export default {
     flex: 0 1 50px;
 }
 
+.send-box {
+    width: 125px;
+    height: 50px;
+    flex: 0 1 125px;
+}
+
 .bottom-bar {
     width: 100%;
-    height: 75px;
+    height: 60px;
     position: fixed;
     background-color: white;
     bottom: 0;
@@ -262,6 +266,10 @@ export default {
 
 .md-content {
     height: 85vh;
+    height: calc(100vh - 110px);
+    height: -moz-calc(100vh - 110px);
+    height: -webkit-calc(100vh - 110px);
+    height: -o-calc(100vh - 110px);
     overflow-y: scroll;
 }
 
