@@ -149,11 +149,20 @@ export default {
                 // Copy video to canvas
                 // ctx.clearRect(0, 0, vm.canvas.width, vm.canvas.height);
                 //console.log(Math.round((video.width-vm.canvas.width)/2), 0, vm.canvas.width, vm.canvas.height, 0, 0, vm.canvas.width, vm.canvas.height);
-                let proportion = video.videoWidth/video.videoHeight;
-                let videoWidth = Math.round(vm.canvas.height * proportion);
-                let scale = video.videoWidth/videoWidth;
                 ctx.scale(-1, 1);
-                ctx.drawImage(video, Math.round(((videoWidth-vm.canvas.width)/2)*scale), 0, Math.round(vm.canvas.width*scale), video.videoHeight, 0, 0, vm.canvas.width*-1, vm.canvas.height);
+
+                if (video.videoWidth >= video.videoHeight) {
+                    let proportion = video.videoWidth/video.videoHeight;
+                    let videoWidth = Math.round(vm.canvas.height * proportion);
+                    let scale = video.videoWidth/videoWidth;
+                    ctx.drawImage(video, Math.round(((videoWidth-vm.canvas.width)/2)*scale), 0, Math.round(vm.canvas.width*scale), video.videoHeight, 0, 0, vm.canvas.width*-1, vm.canvas.height);
+                }
+                else {
+                    let proportion = video.videoHeight/video.videoWidth;
+                    let videoHeight = Math.round(vm.canvas.width * proportion);
+                    let scale = video.videoHeight/videoHeight;
+                    ctx.drawImage(video, 0, Math.round(((videoHeight-vm.canvas.height)/2)*scale), video.videoWidth, Math.round(vm.canvas.height*scale), 0, 0, vm.canvas.width*-1, vm.canvas.height);
+                }
 
                 //if (ctrack.getCurrentPosition()) {
                 //    ctrack.draw(vm.canvas);
@@ -167,9 +176,16 @@ export default {
             function adjustVideoProportions() {
                 // resize overlay and video if proportions of video are not 4:3
                 // keep same height, just change width
-                let proportion = video.videoWidth/video.videoHeight;
-                let videoWidth = Math.round(vm.canvas.height * proportion);
-                video.width = videoWidth;
+                if (video.videoWidth >= video.videoHeight) {
+                    let proportion = video.videoWidth/video.videoHeight;
+                    let videoWidth = Math.round(vm.canvas.height * proportion);
+                    video.width = videoWidth;
+                }
+                else {
+                    let proportion = video.videoHeight/video.videoWidth;
+                    let videoHeight = Math.round(vm.canvas.width * proportion);
+                    video.height = videoHeight;
+                }
                 // vm.canvas.width = videoWidth;
             }
 
