@@ -39,6 +39,7 @@ module.exports = {
         [
             "nuxt-fire",
             {
+                useOnly: ['firestore'],
                 config: {
                     development: {
                         apiKey: "AIzaSyB6TADvrO8ijXUJboo4LEVZrm22Jg623QA",

@@ -113,8 +113,6 @@ export default {
 
         // https://wybiral.github.io/code-art/projects/tiny-mirror/index.js
         // and https://www.auduno.com/clmtrackr/examples/facedeform.html
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-
         vm.$nextTick(() => {
 
             // https://codingthesmartway.com/building-a-real-time-chat-application-with-vue-js-and-firebase-part-2/
@@ -163,15 +161,16 @@ export default {
             };
 
             // Assign user media to video and start loop
-            navigator.getUserMedia({
+            navigator.mediaDevices.getUserMedia({
+                audio: false,
                 video: true
-            }, stream => {
+            }).then(stream => {
                 video.srcObject = stream;
                 video.play();
                 // ctrack.start(video);
 
                 requestAnimationFrame(drawLoop);
-            }, () => {});
+            }).catch(() => {});
 
         });
 
