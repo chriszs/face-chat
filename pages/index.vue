@@ -67,7 +67,7 @@
             <div class="md-layout-item md-size-10">
                 <md-avatar class="md-avatar-icon">
                    <canvas width="40" height="40"></canvas>
-                   <video width="40" height="40" style="display: none"></video>
+                   <video width="40" height="40" style="display: none" playsinline="true" autoplay="true" muted="true"></video>
                 </md-avatar>
             </div>
 
