@@ -120,7 +120,6 @@ export default {
 
             messageCollection.onSnapshot(snapshot => {
                 snapshot.docChanges().forEach(change => {
-                    console.log(change);
                     if (change.type === 'added') {
                         let doc = change.doc;
                         vm.messages.push({
@@ -149,7 +148,12 @@ export default {
             const drawLoop = () => {
                 // Copy video to canvas
                 // ctx.clearRect(0, 0, vm.canvas.width, vm.canvas.height);
-                ctx.drawImage(video, 0, 0, vm.canvas.width, vm.canvas.height);
+                //console.log(Math.round((video.width-vm.canvas.width)/2), 0, vm.canvas.width, vm.canvas.height, 0, 0, vm.canvas.width, vm.canvas.height);
+                let proportion = video.videoWidth/video.videoHeight;
+                let videoWidth = Math.round(vm.canvas.height * proportion);
+                let scale = video.videoWidth/videoWidth;
+                ctx.scale(-1, 1);
+                ctx.drawImage(video, Math.round(((videoWidth-vm.canvas.width)/2)*scale), 0, Math.round(vm.canvas.width*scale), video.videoHeight, 0, 0, vm.canvas.width*-1, vm.canvas.height);
 
                 //if (ctrack.getCurrentPosition()) {
                 //    ctrack.draw(vm.canvas);
@@ -160,14 +164,36 @@ export default {
                 requestAnimationFrame(drawLoop);
             };
 
+            function adjustVideoProportions() {
+                // resize overlay and video if proportions of video are not 4:3
+                // keep same height, just change width
+                let proportion = video.videoWidth/video.videoHeight;
+                let videoWidth = Math.round(vm.canvas.height * proportion);
+                video.width = videoWidth;
+                // vm.canvas.width = videoWidth;
+            }
+
             // Assign user media to video and start loop
             navigator.mediaDevices.getUserMedia({
                 audio: false,
                 video: true
             }).then(stream => {
                 video.srcObject = stream;
-                video.play();
+                // video.play();
                 // ctrack.start(video);
+
+                video.onloadedmetadata = function() {
+                    adjustVideoProportions();
+                    video.play();
+                }
+                video.onresize = function() {
+                    adjustVideoProportions();
+                    //if (trackingStarted) {
+                    //    ctrack.stop();
+                    //    ctrack.reset();
+                    //    ctrack.start(video);
+                    //}
+                }
 
                 requestAnimationFrame(drawLoop);
             }).catch(() => {});
