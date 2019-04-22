@@ -35,9 +35,6 @@ module.exports = {
     render: {
         ssr: false
     },
-    router: {
-        base: `/face-chat/`
-    },
     modules: [
         [
             "nuxt-fire",
@@ -86,7 +83,6 @@ module.exports = {
         }
     ],
     build: {
-        vendor: ["vue-material"],
         html: {
             minify: {
                 collapseWhitespace: false,

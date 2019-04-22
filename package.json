@@ -14,7 +14,8 @@
         "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
         "precommit": "npm run lint",
         "push": "s3-deploy './dist/**' --cwd './dist/' --bucket apps.publicintegrity.org --gzip --filePrefix $npm_package_name --cache 120",
-        "start": "nuxt start"
+        "start": "nuxt start",
+        "now-build": "nuxt generate"
     },
     "dependencies": {
         "clmtrackr": "^1.1.2",
