@@ -1,7 +1,7 @@
 <template>
     <div class="page-container">
         <md-app md-waterfall md-mode="fixed">
-            <md-app-toolbar class="md-primary" md-mode="fixed">
+            <md-app-toolbar class="md-primary">
 
                 <h3 class="md-title">Face Chat</h3>
 
@@ -43,6 +43,9 @@
               -->
 
             <md-app-content v-chat-scroll="{ always: false, smooth: true }">
+
+                <div style="width: 100%;height: 50px;">&nbsp;</div>
+
                 <div
                     class="md-layout"
                     v-for="message in messages"
@@ -58,6 +61,8 @@
                         <p>{{ message.text }}</p>
                     </div>
                 </div>
+
+                <div style="width: 100%;height: 60px;">&nbsp;</div>
             </md-app-content>
 
         </md-app>
@@ -249,6 +254,11 @@ export default {
     flex: 0 1 105px;
 }
 
+.md-app-toolbar {
+    position: fixed;
+    top: 0;
+}
+
 .bottom-bar {
     width: 100%;
     height: 60px;
@@ -265,11 +275,7 @@ export default {
 }
 
 .md-content {
-    height: 85vh;
-    height: calc(100vh - 110px);
-    height: -moz-calc(100vh - 110px);
-    height: -webkit-calc(100vh - 110px);
-    height: -o-calc(100vh - 110px);
+    height: 100vh;
     overflow-y: scroll;
 }
 
