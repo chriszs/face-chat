@@ -94,7 +94,6 @@
 
 <script>
 /* eslint-disable new-cap */
-// import clm from 'clmtrackr';
 
 import moment from 'moment';
 
@@ -112,10 +111,6 @@ export default {
 
         let vm = this;
 
-        let requestAnimationFrame = window.requestAnimationFrame;
-
-        // https://wybiral.github.io/code-art/projects/tiny-mirror/index.js
-        // and https://www.auduno.com/clmtrackr/examples/facedeform.html
         vm.$nextTick(() => {
 
             // https://codingthesmartway.com/building-a-real-time-chat-application-with-vue-js-and-firebase-part-2/
@@ -139,83 +134,6 @@ export default {
             setTimeout(() => {
                 vm.$el.querySelector('input').focus();
             },500);
-
-            vm.canvas = vm.$el.querySelector('canvas');
-            let video = vm.$el.querySelector('video');
-
-            const ctx = vm.canvas.getContext('2d');
-
-            // let ctrack = new clm.tracker();
-            // ctrack.init();
-
-            const drawLoop = () => {
-                // Copy video to canvas
-                // ctx.clearRect(0, 0, vm.canvas.width, vm.canvas.height);
-                //console.log(Math.round((video.width-vm.canvas.width)/2), 0, vm.canvas.width, vm.canvas.height, 0, 0, vm.canvas.width, vm.canvas.height);
-                ctx.scale(-1, 1);
-
-                if (video.videoWidth >= video.videoHeight) {
-                    let proportion = video.videoWidth/video.videoHeight;
-                    let videoWidth = Math.round(vm.canvas.height * proportion);
-                    let scale = video.videoWidth/videoWidth;
-                    ctx.drawImage(video, Math.round(((videoWidth-vm.canvas.width)/2)*scale), 0, Math.round(vm.canvas.width*scale), video.videoHeight, 0, 0, vm.canvas.width*-1, vm.canvas.height);
-                }
-                else {
-                    let proportion = video.videoHeight/video.videoWidth;
-                    let videoHeight = Math.round(vm.canvas.width * proportion);
-                    let scale = video.videoHeight/videoHeight;
-                    ctx.drawImage(video, 0, Math.round(((videoHeight-vm.canvas.height)/2)*scale), video.videoWidth, Math.round(vm.canvas.height*scale), 0, 0, vm.canvas.width*-1, vm.canvas.height);
-                }
-
-                //if (ctrack.getCurrentPosition()) {
-                //    ctrack.draw(vm.canvas);
-                //}
-                // Set canvas to favicon
-                // favicon.setAttribute('href', canvas.toDataURL());
-                // Loop
-                requestAnimationFrame(drawLoop);
-            };
-
-            function adjustVideoProportions() {
-                // resize overlay and video if proportions of video are not 4:3
-                // keep same height, just change width
-                if (video.videoWidth >= video.videoHeight) {
-                    let proportion = video.videoWidth/video.videoHeight;
-                    let videoWidth = Math.round(vm.canvas.height * proportion);
-                    video.width = videoWidth;
-                }
-                else {
-                    let proportion = video.videoHeight/video.videoWidth;
-                    let videoHeight = Math.round(vm.canvas.width * proportion);
-                    video.height = videoHeight;
-                }
-                // vm.canvas.width = videoWidth;
-            }
-
-            // Assign user media to video and start loop
-            navigator.mediaDevices.getUserMedia({
-                audio: false,
-                video: true
-            }).then(stream => {
-                video.srcObject = stream;
-                // video.play();
-                // ctrack.start(video);
-
-                video.onloadedmetadata = function() {
-                    adjustVideoProportions();
-                    video.play();
-                }
-                video.onresize = function() {
-                    adjustVideoProportions();
-                    //if (trackingStarted) {
-                    //    ctrack.stop();
-                    //    ctrack.reset();
-                    //    ctrack.start(video);
-                    //}
-                }
-
-                requestAnimationFrame(drawLoop);
-            }).catch(() => {});
 
         });
 
